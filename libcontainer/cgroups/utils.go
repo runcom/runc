@@ -183,16 +183,6 @@ func GetThisCgroupDir(subsystem string) (string, error) {
 	return getControllerPath(subsystem, cgroups)
 }
 
-func GetInitCgroupDir(subsystem string) (string, error) {
-
-	cgroups, err := ParseCgroupFile("/proc/1/cgroup")
-	if err != nil {
-		return "", err
-	}
-
-	return getControllerPath(subsystem, cgroups)
-}
-
 func readProcsFile(dir string) ([]int, error) {
 	f, err := os.Open(filepath.Join(dir, "cgroup.procs"))
 	if err != nil {

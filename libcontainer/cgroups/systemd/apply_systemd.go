@@ -133,16 +133,6 @@ func UseSystemd() bool {
 	return hasStartTransientUnit
 }
 
-func getIfaceForUnit(unitName string) string {
-	if strings.HasSuffix(unitName, ".scope") {
-		return "Scope"
-	}
-	if strings.HasSuffix(unitName, ".service") {
-		return "Service"
-	}
-	return "Unit"
-}
-
 func (m *Manager) Apply(pid int) error {
 	var (
 		c          = m.Cgroups
@@ -378,7 +368,7 @@ func getSubsystemPath(c *configs.Cgroup, subsystem string) (string, error) {
 		return "", err
 	}
 
-	initPath, err := cgroups.GetInitCgroupDir(subsystem)
+	initPath, err := cgroups.GetThisCgroupDir(subsystem)
 	if err != nil {
 		return "", err
 	}
