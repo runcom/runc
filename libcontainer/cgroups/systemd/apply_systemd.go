@@ -200,9 +200,9 @@ func (m *Manager) Apply(pid int) error {
 			newProp("CPUShares", uint64(c.Resources.CpuShares)))
 	}
 
-	if c.Resources.BlkioWeight != 0 {
+	if *c.Resources.BlkioWeight != 0 {
 		properties = append(properties,
-			newProp("BlockIOWeight", uint64(c.Resources.BlkioWeight)))
+			newProp("BlockIOWeight", uint64(*c.Resources.BlkioWeight)))
 	}
 
 	// We need to set kernel memory before processes join cgroup because

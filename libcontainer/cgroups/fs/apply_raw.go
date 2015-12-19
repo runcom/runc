@@ -336,10 +336,14 @@ func removePath(p string, err error) error {
 	return nil
 }
 
-func CheckCpushares(path string, c int64) error {
-	var cpuShares int64
+func CheckCpushares(path string, c *uint64) error {
+	if c == nil {
+		return nil
+	}
 
-	if c == 0 {
+	var cpuShares uint64
+
+	if *c == 0 {
 		return nil
 	}
 
@@ -354,9 +358,9 @@ func CheckCpushares(path string, c int64) error {
 		return err
 	}
 
-	if c > cpuShares {
+	if *c > cpuShares {
 		return fmt.Errorf("The maximum allowed cpu-shares is %d", cpuShares)
-	} else if c < cpuShares {
+	} else if *c < cpuShares {
 		return fmt.Errorf("The minimum allowed cpu-shares is %d", cpuShares)
 	}
 

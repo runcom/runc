@@ -14,13 +14,13 @@ type blockIODevice struct {
 type WeightDevice struct {
 	blockIODevice
 	// Weight is the bandwidth rate for the device, range is from 10 to 1000
-	Weight uint16 `json:"weight"`
+	Weight *uint16 `json:"weight"`
 	// LeafWeight is the bandwidth rate for the device while competing with the cgroup's child cgroups, range is from 10 to 1000, cfq scheduler only
-	LeafWeight uint16 `json:"leafWeight"`
+	LeafWeight *uint16 `json:"leafWeight"`
 }
 
 // NewWeightDevice returns a configured WeightDevice pointer
-func NewWeightDevice(major, minor int64, weight, leafWeight uint16) *WeightDevice {
+func NewWeightDevice(major, minor int64, weight, leafWeight *uint16) *WeightDevice {
 	wd := &WeightDevice{}
 	wd.Major = major
 	wd.Minor = minor
@@ -31,12 +31,12 @@ func NewWeightDevice(major, minor int64, weight, leafWeight uint16) *WeightDevic
 
 // WeightString formats the struct to be writable to the cgroup specific file
 func (wd *WeightDevice) WeightString() string {
-	return fmt.Sprintf("%d:%d %d", wd.Major, wd.Minor, wd.Weight)
+	return fmt.Sprintf("%d:%d %d", wd.Major, wd.Minor, *wd.Weight)
 }
 
 // LeafWeightString formats the struct to be writable to the cgroup specific file
 func (wd *WeightDevice) LeafWeightString() string {
-	return fmt.Sprintf("%d:%d %d", wd.Major, wd.Minor, wd.LeafWeight)
+	return fmt.Sprintf("%d:%d %d", wd.Major, wd.Minor, *wd.LeafWeight)
 }
 
 // ThrottleDevice struct holds a `major:minor rate_per_second` pair
