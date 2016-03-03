@@ -319,10 +319,9 @@ const (
 
 // Arg used for matching specific syscall arguments in Seccomp
 type Arg struct {
-	Index    uint     `json:"index"`
-	Value    uint64   `json:"value"`
-	ValueTwo uint64   `json:"valueTwo"`
-	Op       Operator `json:"op"`
+	Index  uint     `json:"index"`
+	Values []uint64 `json:"values"`
+	Op     Operator `json:"op"`
 }
 
 // Syscall is used to match a syscall in Seccomp

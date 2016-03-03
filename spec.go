@@ -745,10 +745,9 @@ func setupSeccomp(config *specs.Seccomp) (*configs.Seccomp, error) {
 			}
 
 			newArg := configs.Arg{
-				Index:    arg.Index,
-				Value:    arg.Value,
-				ValueTwo: arg.ValueTwo,
-				Op:       newOp,
+				Index:  arg.Index,
+				Values: arg.Values,
+				Op:     newOp,
 			}
 
 			newCall.Args = append(newCall.Args, &newArg)

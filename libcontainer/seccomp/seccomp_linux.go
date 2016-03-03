@@ -150,7 +150,7 @@ func getCondition(arg *configs.Arg) (libseccomp.ScmpCondition, error) {
 		return cond, err
 	}
 
-	return libseccomp.MakeCondition(arg.Index, op, arg.Value, arg.ValueTwo)
+	return libseccomp.MakeCondition(arg.Index, op, arg.Values...)
 }
 
 // Add a rule to match a single syscall
